@@ -10,6 +10,8 @@ export type ProductCategory = {
   customer: string;
   sector: "Oil & Gas" | "Renewable";
   blurb: string;
+  image?: string;
+  imageAlt?: string;
   components: Component[];
 };
 
@@ -40,6 +42,8 @@ export const oilAndGasProducts: ProductCategory[] = [
     title: "Plug Valve (Nordstrom)",
     customer: "Flowserve India Controls Pvt Ltd.",
     sector: "Oil & Gas",
+    image: "/images/products/plug-valve-nordstrom.png",
+    imageAlt: "Plug Valve (Nordstrom) precision-machined components",
     blurb:
       "Precision-machined plug valve internals for severe-service Nordstrom valves subjected to extreme pressures and sour gas environments.",
     components: [
@@ -55,6 +59,8 @@ export const oilAndGasProducts: ProductCategory[] = [
     title: "Slab Gate Valve",
     customer: "Flowserve India Controls Pvt Ltd.",
     sector: "Oil & Gas",
+    image: "/images/products/slab-gate-valve.png",
+    imageAlt: "Slab Gate Valve components",
     blurb:
       "Slab gate valve components finished to sub-micron tolerances with electroless nickel plating (ENP) for maximum abrasion and corrosion resistance.",
     components: [
@@ -70,6 +76,8 @@ export const oilAndGasProducts: ProductCategory[] = [
     title: "High-Performance Butterfly Valve",
     customer: "Bray Controls India Pvt. Ltd. / Flowserve",
     sector: "Oil & Gas",
+    image: "/images/products/butterfly-valve.png",
+    imageAlt: "High-Performance Butterfly Valve components",
     blurb:
       "Critical valve internals manufactured from precipitation-hardened martensitic stainless steel and austenitic grades for zero-leakage flow isolation.",
     components: [
@@ -84,6 +92,8 @@ export const oilAndGasProducts: ProductCategory[] = [
     title: "Gate, Globe & Check Valve",
     customer: "Flowserve India Controls Pvt Ltd.",
     sector: "Oil & Gas",
+    image: "/images/products/gate-globe-check-valve.png",
+    imageAlt: "Gate, Globe & Check Valve components",
     blurb:
       "Trim and body components engineered for high-pressure pipeline and manifold isolation across petrochemical installations.",
     components: [
@@ -98,6 +108,8 @@ export const oilAndGasProducts: ProductCategory[] = [
     title: "Trunnion Ball Valve",
     customer: "Flowserve India Controls / MOGAS Industries India Ltd.",
     sector: "Oil & Gas",
+    image: "/images/products/trunnion-ball-valve.png",
+    imageAlt: "Trunnion Ball Valve components",
     blurb:
       "Precision heavy-wall trunnion-mounted ball valve structural components designed for high-stress pipeline transportation networks.",
     components: [

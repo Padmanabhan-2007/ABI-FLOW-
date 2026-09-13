@@ -1,7 +1,9 @@
 "use client";
 
-import { motion } from "framer-motion";
-import { ShieldCheck, Award, Gauge } from "lucide-react";
+import { useState, useEffect } from "react";
+import Image from "next/image";
+import { motion, AnimatePresence } from "framer-motion";
+import { ShieldCheck, Award, Gauge, X } from "lucide-react";
 import { FlowBackground } from "@/components/visuals/FlowBackground";
 import { Reveal } from "@/components/ui/Reveal";
 import { CountUp } from "@/components/ui/CountUp";
@@ -22,6 +24,25 @@ function SpecStat({ value, label }: { value: string; label: string }) {
 }
 
 export function Hero() {
+  const [certificateOpen, setCertificateOpen] = useState(false);
+
+  // Accessible Escape key handling & safe client-side scroll locking
+  useEffect(() => {
+    if (!certificateOpen) return;
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        setCertificateOpen(false);
+      }
+    };
+    window.addEventListener("keydown", handleKeyDown);
+    const prevOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+      document.body.style.overflow = prevOverflow;
+    };
+  }, [certificateOpen]);
+
   return (
     <section
       id="top"
@@ -120,10 +141,15 @@ export function Hero() {
                     <Award className="h-3 w-3 text-lime" />
                     25 Yrs · Flowserve Association
                   </span>
-                  <span className="inline-flex items-center gap-1.5 rounded-full border border-white/10 bg-white/5 px-3 py-1 text-[10px] font-semibold uppercase tracking-wide text-mist/80">
+                  <button
+                    type="button"
+                    onClick={() => setCertificateOpen(true)}
+                    aria-label="View 15 years Flowserve partnership certificate"
+                    className="inline-flex items-center gap-1.5 rounded-full border border-white/10 bg-white/5 px-3 py-1 text-[10px] font-semibold uppercase tracking-wide text-mist/80 transition-all hover:border-cyan/50 hover:bg-white/10 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan cursor-pointer"
+                  >
                     <Award className="h-3 w-3 text-cyan" />
                     15 Yrs · Partnership Certificate
-                  </span>
+                  </button>
                 </div>
               </div>
             </div>
@@ -143,6 +169,85 @@ export function Hero() {
           <span className="h-2 w-1 rounded-full bg-white/70" />
         </div>
       </motion.div>
+
+      {/* Certificate Modal Lightbox */}
+      <AnimatePresence>
+        {certificateOpen && (
+          <div
+            className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 overflow-y-auto"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="hero-cert-modal-title"
+          >
+            {/* Backdrop — click backdrop to close */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setCertificateOpen(false)}
+              className="fixed inset-0 bg-navy/85 backdrop-blur-md cursor-pointer"
+              aria-hidden="true"
+            />
+
+            {/* Modal Card — click inside does not close */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95, y: 15 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.95, y: 15 }}
+              transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
+              onClick={(e) => e.stopPropagation()}
+              className="relative z-10 flex flex-col items-center max-w-lg w-full rounded-3xl border border-white/20 bg-navy/95 p-5 sm:p-6 shadow-2xl text-white backdrop-blur-xl max-h-[92vh]"
+            >
+              {/* Close Button */}
+              <button
+                type="button"
+                onClick={() => setCertificateOpen(false)}
+                aria-label="Close certificate modal"
+                className="absolute top-4 right-4 z-20 flex h-9 w-9 items-center justify-center rounded-full bg-white/10 text-white transition-colors hover:bg-white/20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan cursor-pointer"
+              >
+                <X className="h-5 w-5" />
+              </button>
+
+              {/* Modal Header */}
+              <div className="w-full text-center pb-3 border-b border-white/10 pr-8">
+                <span className="text-[10px] font-mono uppercase tracking-widest text-cyan-bright font-semibold">
+                  Authentic Credential
+                </span>
+                <h3 id="hero-cert-modal-title" className="mt-1 font-display text-lg sm:text-xl font-bold tracking-tight">
+                  15 YEARS OF PARTNERSHIP
+                </h3>
+                <p className="mt-0.5 text-xs text-mist/70">
+                  Flowserve · Supplier Summit May 2014
+                </p>
+              </div>
+
+              {/* Upright Contained Certificate Photograph */}
+              <div className="relative mt-4 aspect-[628/1024] w-full max-h-[62vh] rounded-2xl overflow-hidden bg-black/40 border border-white/10 shadow-inner">
+                <Image
+                  src="/images/certificates/flowserve-15-years-partnership.jpg"
+                  alt="Flowserve 15 Years of Partnership certificate presented to ABI Flow Products Pvt. Ltd. in May 2014."
+                  fill
+                  sizes="(max-width: 640px) 90vw, 480px"
+                  className="object-contain p-2"
+                  priority
+                />
+              </div>
+
+              {/* Modal Footer */}
+              <div className="mt-3 flex items-center justify-between w-full pt-2.5 border-t border-white/10 text-xs text-mist/60">
+                <span>ABI Flow Products Pvt. Ltd.</span>
+                <button
+                  type="button"
+                  onClick={() => setCertificateOpen(false)}
+                  className="rounded-full bg-white/10 px-4 py-1.5 text-xs font-semibold text-white hover:bg-white/20 transition-colors cursor-pointer"
+                >
+                  Close
+                </button>
+              </div>
+            </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
     </section>
   );
 }

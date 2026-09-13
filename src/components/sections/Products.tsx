@@ -84,6 +84,7 @@ export function Products() {
               >
                 <span className="absolute inset-x-0 top-0 h-0.5 origin-left scale-x-0 bg-gradient-to-r from-cyan via-cyan-bright to-magenta transition-transform duration-300 group-hover:scale-x-100" />
 
+                {/* 1. Category & Number */}
                 <div className="flex items-start justify-between gap-4">
                   <div className="flex items-center gap-3">
                     <span className="font-mono text-xs text-steel">
@@ -96,18 +97,37 @@ export function Products() {
                   <ArrowUpRight className="h-5 w-5 text-line transition-colors group-hover:text-cyan" />
                 </div>
 
-                <div className="mt-5 flex-1">
+                <div className="mt-5 flex-1 flex flex-col">
+                  {/* 2. Product Name */}
                   <h3 className="text-h3 text-ink">
                     {cat.title}
                   </h3>
-                  <p className="mt-1.5 text-xs font-semibold uppercase tracking-wider text-magenta">
-                    {cat.customer}
-                  </p>
-                  <p className="mt-3 text-sm leading-relaxed text-ink-soft">
+
+                  {/* 3. Product Image */}
+                  {cat.image && (
+                    <div className="relative mt-4 aspect-[16/10] w-full max-h-64 sm:max-h-72 overflow-hidden rounded-xl border border-line/60 bg-white/70">
+                      <Image
+                        src={cat.image}
+                        alt={cat.imageAlt || `${cat.title} precision-machined components`}
+                        fill
+                        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 600px"
+                        className="object-contain p-3 transition-transform duration-500 ease-out group-hover:scale-105"
+                      />
+                    </div>
+                  )}
+
+                  {/* 4. Description */}
+                  <p className="mt-4 text-sm leading-relaxed text-ink-soft">
                     {cat.blurb}
+                  </p>
+
+                  {/* 5. OEM / Customer Association */}
+                  <p className="mt-3 text-xs font-semibold uppercase tracking-wider text-magenta">
+                    {cat.customer}
                   </p>
                 </div>
 
+                {/* 6. Technical Specifications List */}
                 <ValveSpecList cat={cat} />
               </Card>
             ))}
