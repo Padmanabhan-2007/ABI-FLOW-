@@ -15,6 +15,7 @@ const spaceGrotesk = Space_Grotesk({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://abiflow.com"),
   title:
     "ABI Flow Products (P) Ltd — Precision Components for Oil & Gas and Renewable Energy",
   description:
@@ -31,11 +32,24 @@ export const metadata: Metadata = {
     "CNC machining Ambattur",
     "ISO 9001:2015 TÜV NORD",
   ],
+  icons: {
+    icon: "/icon.png",
+    shortcut: "/favicon.ico",
+    apple: "/icon.png",
+  },
   openGraph: {
     title: "ABI Flow Products (P) Ltd — Precision Engineering",
     description:
       "Precision machined components for Oil & Gas flow control and Renewable Energy wind generation. 44+ years of manufacturing excellence.",
     type: "website",
+    images: [
+      {
+        url: "/images/abi-flow-logo.png",
+        width: 1014,
+        height: 725,
+        alt: "ABI Flow Products (P) Ltd Logo",
+      },
+    ],
   },
 };
 
