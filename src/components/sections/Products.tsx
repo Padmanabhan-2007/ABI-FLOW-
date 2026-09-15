@@ -7,6 +7,7 @@ import { SectionHeading } from "@/components/ui/SectionHeading";
 import { Section } from "@/components/ui/Section";
 import { Reveal } from "@/components/ui/Reveal";
 import { Eyebrow } from "@/components/ui/Eyebrow";
+import { Parallax } from "@/components/ui/Parallax";
 import {
   oilAndGasProducts,
   windGenerationData,
@@ -48,10 +49,30 @@ export function Products() {
       {/* SECTION A: OIL & GAS / FLOW CONTROL                                       */}
       {/* ========================================================================= */}
       <section className="relative overflow-hidden bg-gradient-to-b from-[#f8fafc] via-light to-[#f1f6fa] py-24 text-ink sm:py-28">
-        {/* Extremely subtle ambient cyan glow matching the Facility section and reference */}
+        {/* Subtle ambient cyan glow and industrial flow streamlines */}
         <div className="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden="true">
           <div className="absolute -right-24 top-16 h-80 w-80 rounded-full bg-cyan/[0.05] blur-[120px]" />
           <div className="absolute -left-20 bottom-24 h-72 w-72 rounded-full bg-cyan-bright/[0.03] blur-[100px]" />
+          {/* Subtle industrial flow vector streamlines */}
+          <svg
+            className="absolute inset-0 h-full w-full opacity-[0.25]"
+            viewBox="0 0 1200 800"
+            preserveAspectRatio="none"
+            fill="none"
+          >
+            <path
+              d="M-50 180 C 300 240, 600 120, 950 200 S 1150 150, 1300 180"
+              stroke="rgba(22, 181, 224, 0.4)"
+              strokeWidth="1.25"
+              strokeDasharray="6 14"
+            />
+            <path
+              d="M-50 420 C 250 360, 680 480, 980 390 S 1180 440, 1300 410"
+              stroke="rgba(14, 143, 180, 0.3)"
+              strokeWidth="1.0"
+              strokeDasharray="4 18"
+            />
+          </svg>
         </div>
 
         <div className="container-x relative z-10">
@@ -80,7 +101,7 @@ export function Products() {
                 key={cat.id}
                 delay={(i % 3) * 0.07}
                 tone="light"
-                className={`flex flex-col p-7 sm:p-8 ${spans[i]}`}
+                className={`flex flex-col p-7 sm:p-8 transition-all duration-300 hover:-translate-y-1.5 hover:shadow-xl ${spans[i]}`}
               >
                 <span className="absolute inset-x-0 top-0 h-0.5 origin-left scale-x-0 bg-gradient-to-r from-cyan via-cyan-bright to-magenta transition-transform duration-300 group-hover:scale-x-100" />
 
@@ -94,12 +115,12 @@ export function Products() {
                       {cat.sector}
                     </span>
                   </div>
-                  <ArrowUpRight className="h-5 w-5 text-line transition-colors group-hover:text-cyan" />
+                  <ArrowUpRight className="h-5 w-5 text-line transition-all duration-300 group-hover:text-cyan group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
                 </div>
 
                 <div className="mt-5 flex-1 flex flex-col">
                   {/* 2. Product Name */}
-                  <h3 className="text-h3 text-ink">
+                  <h3 className="text-h3 text-ink transition-colors duration-200 group-hover:text-cyan-deep">
                     {cat.title}
                   </h3>
 
@@ -199,6 +220,30 @@ export function Products() {
       {/* SECTION B: RENEWABLE ENERGY / WIND GENERATION                             */}
       {/* ========================================================================= */}
       <section className="relative overflow-hidden bg-navy text-white py-24 sm:py-28">
+        {/* Subtle Aerodynamic Wind Streamlines Background */}
+        <div className="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden="true">
+          <div className="absolute -left-20 top-1/4 h-80 w-80 rounded-full bg-lime/[0.04] blur-[120px]" />
+          <svg
+            className="absolute inset-0 h-full w-full opacity-20"
+            viewBox="0 0 1200 600"
+            preserveAspectRatio="none"
+            fill="none"
+          >
+            <path
+              d="M-50 120 C 300 180, 700 80, 1250 140"
+              stroke="rgba(155, 203, 60, 0.45)"
+              strokeWidth="1.25"
+              strokeDasharray="8 20"
+            />
+            <path
+              d="M-50 280 C 350 220, 800 320, 1250 260"
+              stroke="rgba(56, 208, 245, 0.3)"
+              strokeWidth="1.0"
+              strokeDasharray="6 24"
+            />
+          </svg>
+        </div>
+
         <div className="container-x relative z-10">
           {/* Section Header */}
           <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-8 pb-12 border-b border-white/10">
@@ -221,7 +266,7 @@ export function Products() {
 
             {/* Wind Power Capacity Range Display: 0.5 MW -> 2 MW -> 3 MW */}
             <Reveal delay={0.2} className="shrink-0">
-              <div className="rounded-2xl border border-white/15 bg-white/5 p-6 backdrop-blur">
+              <div className="rounded-2xl border border-white/15 bg-white/5 p-6 backdrop-blur transition-all duration-300 hover:border-lime/40">
                 <div className="flex items-center justify-between gap-6 text-xs text-mist/60 font-mono uppercase tracking-wider">
                   <span>{windGenerationData.applicationLabel}</span>
                   <span className="text-lime font-bold">{windGenerationData.capacityRange}</span>
@@ -229,7 +274,7 @@ export function Products() {
                 <div className="mt-3 flex items-center gap-3">
                   {windGenerationData.capacities.map((cap, idx) => (
                     <div key={cap} className="flex items-center gap-3">
-                      <span className="font-display text-lg font-bold text-white px-3 py-1 rounded-xl bg-white/10 border border-white/10">
+                      <span className="font-display text-lg font-bold text-white px-3 py-1 rounded-xl bg-white/10 border border-white/10 transition-all duration-300 hover:border-lime/50 hover:bg-lime/10">
                         {cap}
                       </span>
                       {idx < windGenerationData.capacities.length - 1 && (
@@ -247,31 +292,33 @@ export function Products() {
 
           {/* Wind Vertical Presentation: Large Left Visual + 3 Parts Categories */}
           <div className="mt-14 grid gap-10 lg:grid-cols-12 items-stretch">
-            {/* Left: Visible High-Resolution Wind Turbine & Drivetrain Visual */}
+            {/* Left: Visible High-Resolution Wind Turbine & Drivetrain Visual with Parallax Depth */}
             <Reveal className="lg:col-span-5 flex flex-col">
-              <div className="group relative flex-1 min-h-[380px] overflow-hidden rounded-3xl border border-white/15 shadow-2xl">
-                <Image
-                  src="/images/wind-energy.jpg"
-                  alt="Wind turbine nacelle and mechanical drivetrain components"
-                  fill
-                  sizes="(max-width: 1024px) 100vw, 42vw"
-                  className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-navy/95 via-navy/35 to-transparent" />
+              <Parallax distance={35} className="flex-1 flex flex-col">
+                <div className="group relative flex-1 min-h-[380px] overflow-hidden rounded-3xl border border-white/15 shadow-2xl">
+                  <Image
+                    src="/images/wind-energy.jpg"
+                    alt="Wind turbine nacelle and mechanical drivetrain components"
+                    fill
+                    sizes="(max-width: 1024px) 100vw, 42vw"
+                    className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-navy/95 via-navy/35 to-transparent" />
 
-                {/* Overlay Badge */}
-                <div className="absolute bottom-6 left-6 right-6">
-                  <span className="rounded-full bg-lime/20 border border-lime/40 px-3 py-1 text-[11px] font-mono font-semibold uppercase tracking-wider text-lime">
-                    OEM Partner: {windGenerationData.customer}
-                  </span>
-                  <h4 className="mt-3 font-display text-xl font-bold text-white">
-                    Wind Turbine Mechanical Drivetrains
-                  </h4>
-                  <p className="mt-1 text-xs text-mist/75">
-                    Critical concentric rings, bearing supports, and adapter interfaces for 0.5 MW to 3 MW platforms.
-                  </p>
+                  {/* Overlay Badge */}
+                  <div className="absolute bottom-6 left-6 right-6">
+                    <span className="rounded-full bg-lime/20 border border-lime/40 px-3 py-1 text-[11px] font-mono font-semibold uppercase tracking-wider text-lime">
+                      OEM Partner: {windGenerationData.customer}
+                    </span>
+                    <h4 className="mt-3 font-display text-xl font-bold text-white">
+                      Wind Turbine Mechanical Drivetrains
+                    </h4>
+                    <p className="mt-1 text-xs text-mist/75">
+                      Critical concentric rings, bearing supports, and adapter interfaces for 0.5 MW to 3 MW platforms.
+                    </p>
+                  </div>
                 </div>
-              </div>
+              </Parallax>
             </Reveal>
 
             {/* Right: Three Visually Identifiable Categories: Wind Parts, Generator Parts, Coupling Parts */}

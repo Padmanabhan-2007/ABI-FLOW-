@@ -217,6 +217,9 @@ export function Facility() {
                     aria-label={`View detailed specifications for ${m.name} ${m.model}`}
                     className="group relative flex h-full w-full flex-col overflow-hidden rounded-2xl border border-line bg-white text-left shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-cyan hover:shadow-xl focus-visible:ring-2 focus-visible:ring-cyan"
                   >
+                    {/* Interactive Accent Line */}
+                    <span className="absolute inset-x-0 top-0 h-0.5 origin-left scale-x-0 bg-gradient-to-r from-cyan via-cyan-bright to-magenta transition-transform duration-300 group-hover:scale-x-100 z-10" />
+
                     {/* Visual Preview Frame */}
                     {m.image && (
                       <div className="relative aspect-[16/10] w-full overflow-hidden bg-cloud">
@@ -484,16 +487,16 @@ export function Facility() {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               onClick={() => setSelectedMachine(null)}
-              className="fixed inset-0 bg-navy/80 backdrop-blur-md"
+              className="fixed inset-0 bg-navy/80 backdrop-blur-md cursor-pointer"
               aria-hidden="true"
             />
 
             {/* Modal Dialog Body */}
             <motion.div
-              initial={{ opacity: 0, scale: 0.95, y: 20 }}
+              initial={{ opacity: 0, scale: 0.96, y: 18 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
-              exit={{ opacity: 0, scale: 0.95, y: 20 }}
-              transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
+              exit={{ opacity: 0, scale: 0.96, y: 18 }}
+              transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
               className="relative z-10 w-full max-w-2xl overflow-hidden rounded-3xl border border-line bg-white shadow-2xl"
             >
               {/* Optional Header Image for Highlights & CMM */}
