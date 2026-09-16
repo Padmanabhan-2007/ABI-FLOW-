@@ -53,30 +53,15 @@ export function Contact() {
       <div className="container-x section-y relative">
         <div className="grid items-end gap-10 lg:grid-cols-12">
           <Reveal className="lg:col-span-8">
-            <div className="inline-flex items-center gap-2 rounded-full border border-cyan/30 bg-cyan/10 px-3.5 py-1 text-[11px] font-mono font-semibold uppercase tracking-wider text-cyan-bright mb-3">
-              <span className="h-1.5 w-1.5 rounded-full bg-cyan animate-pulse" />
-              FAST-TRACK RFQ &amp; TECHNICAL COLLABORATION
-            </div>
-            <h2 className="mt-3 text-h2 text-white">
+            <Eyebrow light>Get in touch</Eyebrow>
+            <h2 className="mt-5 text-h2 text-white">
               Let&apos;s machine your next
               <br className="hidden sm:block" /> critical component.
             </h2>
-            <p className="mt-4 max-w-xl text-lead text-mist/70">
-              Send us your CAD drawings (STEP, IGES, DXF) and engineering requirements — our tooling engineers respond with comprehensive DFM review and technical quotation.
+            <p className="mt-5 max-w-xl text-lead text-mist/70">
+              Send us your drawings and requirements — our team responds with a
+              quote and lead time.
             </p>
-
-            {/* Stitch OEM Assurance Badges */}
-            <div className="mt-6 flex flex-wrap gap-3 font-mono text-[11px]">
-              <span className="inline-flex items-center gap-1.5 rounded-lg border border-white/10 bg-white/[0.04] px-3 py-1.5 text-mist/80">
-                <span className="h-1.5 w-1.5 rounded-full bg-cyan" /> Strict NDA Assurance
-              </span>
-              <span className="inline-flex items-center gap-1.5 rounded-lg border border-white/10 bg-white/[0.04] px-3 py-1.5 text-mist/80">
-                <span className="h-1.5 w-1.5 rounded-full bg-secondary-fixed-dim" /> 48-Hr DFM Turnaround
-              </span>
-              <span className="inline-flex items-center gap-1.5 rounded-lg border border-white/10 bg-white/[0.04] px-3 py-1.5 text-mist/80">
-                <span className="h-1.5 w-1.5 rounded-full bg-lime" /> Direct Tooling Support
-              </span>
-            </div>
           </Reveal>
           <Reveal delay={0.1} className="flex flex-wrap gap-4 lg:col-span-4 lg:justify-end">
             <Button href="mailto:afppur@gmail.com" variant="primary" size="lg" withArrow magnetic>

@@ -1,5 +1,6 @@
 import { Nav } from "@/components/sections/Nav";
 import { Hero } from "@/components/sections/Hero";
+import { HeroScrollExpand } from "@/components/sections/HeroScrollExpand";
 import { Stats } from "@/components/sections/Stats";
 import { Customers } from "@/components/sections/Customers";
 import { Certificate } from "@/components/sections/Certificate";
@@ -16,6 +17,7 @@ export default function Home() {
       <Nav />
       <main>
         <Hero />
+        <HeroScrollExpand />
         <Stats />
         <Customers />
         <Certificate />

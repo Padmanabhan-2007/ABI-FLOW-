@@ -63,12 +63,13 @@ export function Media({
             fill
             sizes={sizes}
             priority={priority}
-            className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.04]"
+            className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.03]"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-navy/45 via-transparent to-transparent" />
           {label && (
-            <figcaption className="absolute bottom-3 left-3 rounded-full bg-navy/55 px-3 py-1 text-[11px] font-medium uppercase tracking-wide text-white backdrop-blur">
-              {label}
+            <figcaption className="absolute bottom-3 left-3 inline-flex items-center gap-1.5 rounded-full bg-navy/60 px-3 py-1 text-[11px] font-medium uppercase tracking-wide text-white backdrop-blur border border-white/10">
+              {Icon && <Icon className="h-3.5 w-3.5 text-cyan-bright shrink-0" />}
+              <span>{label}</span>
             </figcaption>
           )}
         </>

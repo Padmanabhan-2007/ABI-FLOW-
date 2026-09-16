@@ -1,13 +1,14 @@
 "use client";
 
 import Image from "next/image";
-import { ArrowUpRight, Wind, ShieldAlert, Cpu, Sparkles, Layers, Check, Activity, Compass, Gauge } from "lucide-react";
+import { ArrowUpRight, Wind, ShieldAlert, Cpu, Sparkles, Layers, Check } from "lucide-react";
 import { Card } from "@/components/ui/Card";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { Section } from "@/components/ui/Section";
 import { Reveal } from "@/components/ui/Reveal";
 import { Eyebrow } from "@/components/ui/Eyebrow";
 import { Parallax } from "@/components/ui/Parallax";
+import { WindScrollExpand } from "@/components/sections/WindScrollExpand";
 import {
   oilAndGasProducts,
   windGenerationData,
@@ -24,47 +25,17 @@ const spans = [
   "lg:col-span-12",
 ];
 
-// Telemetry badges derived from Stitch design system for valve classes
-const valveTelemetry: Record<string, { spec: string; tag: string }> = {
-  "plug-valve-nordstrom": {
-    spec: "API-6A / API-16A",
-    tag: "15,000 - 20,000 PSI · NACE MR0175",
-  },
-  "slab-gate-valve": {
-    spec: "API-6D / ISO 14313",
-    tag: "ASME 150 - 2500 · Through-Conduit",
-  },
-  "butterfly-valve": {
-    spec: "ASME B16.34 / API 609",
-    tag: "Triple Offset · Zero-Leakage Seat",
-  },
-  "gate-globe-check-valve": {
-    spec: "API 600 / API 602",
-    tag: "High Pressure Steam & Severe Service",
-  },
-  "trunnion-ball-valve": {
-    spec: "API 6D / ISO 5208",
-    tag: "Double Block & Bleed (DBB) · Subsea",
-  },
-};
-
 function ValveSpecList({ cat }: { cat: ProductCategory }) {
   return (
-    <ul className="mt-5 space-y-2 border-t border-line/70 pt-5">
+    <ul className="mt-5 space-y-1.5 border-t border-line/70 pt-5">
       {cat.components.map((comp) => (
         <li
           key={comp.name}
-          className="-mx-2 flex flex-col justify-between gap-1 rounded-xl px-3 py-2 text-sm transition-colors hover:bg-white sm:flex-row sm:items-baseline border border-transparent hover:border-line/60"
+          className="-mx-2 flex flex-col justify-between gap-1 rounded-lg px-2.5 py-1.5 text-sm transition-colors hover:bg-light/80 sm:flex-row sm:items-baseline"
         >
-          <span className="font-medium text-ink flex items-center gap-2">
-            <span className="h-1.5 w-1.5 rounded-full bg-cyan-deep/70" />
-            {comp.name}
-          </span>
+          <span className="font-medium text-ink">{comp.name}</span>
           <span className="font-mono text-xs text-steel">
-            <span className="rounded bg-light px-2 py-0.5 font-semibold text-ink-soft border border-line/50">
-              {comp.size}
-            </span>{" "}
-            · <span className="text-cyan-deep font-medium">{comp.material}</span>
+            {comp.size} · <span className="text-ink-soft">{comp.material}</span>
           </span>
         </li>
       ))}
@@ -76,16 +47,16 @@ export function Products() {
   return (
     <div id="products" className="relative">
       {/* ========================================================================= */}
-      {/* SECTION A: OIL & GAS / FLOW CONTROL (STITCH SECTOR CAPABILITIES)         */}
+      {/* SECTION A: OIL & GAS / FLOW CONTROL                                       */}
       {/* ========================================================================= */}
       <section className="relative overflow-hidden bg-gradient-to-b from-[#f8fafc] via-light to-[#f1f6fa] py-24 text-ink sm:py-28">
         {/* Subtle ambient cyan glow and industrial flow streamlines */}
         <div className="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden="true">
-          <div className="absolute -right-24 top-16 h-80 w-80 rounded-full bg-cyan/[0.06] blur-[120px]" />
-          <div className="absolute -left-20 bottom-24 h-72 w-72 rounded-full bg-cyan-bright/[0.04] blur-[100px]" />
+          <div className="absolute -right-24 top-16 h-80 w-80 rounded-full bg-cyan/[0.05] blur-[120px]" />
+          <div className="absolute -left-20 bottom-24 h-72 w-72 rounded-full bg-cyan-bright/[0.03] blur-[100px]" />
           {/* Subtle industrial flow vector streamlines */}
           <svg
-            className="absolute inset-0 h-full w-full opacity-[0.22]"
+            className="absolute inset-0 h-full w-full opacity-[0.25]"
             viewBox="0 0 1200 800"
             preserveAspectRatio="none"
             fill="none"
@@ -108,13 +79,12 @@ export function Products() {
         <div className="container-x relative z-10">
           <div className="max-w-3xl">
             <Reveal>
-              <div className="inline-flex items-center gap-2 rounded-full border border-line bg-white/90 px-3.5 py-1 text-[11px] font-mono font-semibold uppercase tracking-wider text-cyan-deep shadow-xs">
-                <span className="h-1.5 w-1.5 rounded-full bg-cyan-deep animate-pulse" />
-                Sector 01 · Severe-Service Flow Control · SPEC-API 6A
-              </div>
+              <span className="inline-flex items-center gap-2 rounded-full border border-line bg-white/80 px-3.5 py-1 text-eyebrow text-cyan-deep shadow-xs">
+                Vertical 01 · Severe-Service Manufacturing
+              </span>
             </Reveal>
             <Reveal delay={0.08} className="mt-4">
-              <h2 className="text-display text-ink tracking-tight uppercase">
+              <h2 className="text-display text-ink">
                 Oil &amp; Gas / Flow Control
               </h2>
             </Reveal>
@@ -125,115 +95,88 @@ export function Products() {
             </Reveal>
           </div>
 
-          {/* Oil & Gas Bento Grid with Stitch Telemetry & Frame Styling */}
+          {/* Oil & Gas Bento Grid */}
           <div className="mt-14 grid gap-5 lg:grid-cols-12">
-            {oilAndGasProducts.map((cat, i) => {
-              const telemetry = valveTelemetry[cat.id] || {
-                spec: "API-6A / SPEC-OEM",
-                tag: "High-Tolerance Flow Component",
-              };
+            {oilAndGasProducts.map((cat, i) => (
+              <Card
+                key={cat.id}
+                delay={(i % 3) * 0.07}
+                tone="light"
+                className={`flex flex-col p-7 sm:p-8 transition-all duration-300 hover:-translate-y-1.5 hover:shadow-xl ${spans[i]}`}
+              >
+                <span className="absolute inset-x-0 top-0 h-0.5 origin-left scale-x-0 bg-gradient-to-r from-cyan via-cyan-bright to-magenta transition-transform duration-300 group-hover:scale-x-100" />
 
-              return (
-                <Card
-                  key={cat.id}
-                  delay={(i % 3) * 0.07}
-                  tone="light"
-                  className={`flex flex-col p-7 sm:p-8 transition-all duration-300 hover:-translate-y-1.5 hover:shadow-2xl border border-line/80 hover:border-cyan/50 ${spans[i]}`}
-                >
-                  <span className="absolute inset-x-0 top-0 h-1 origin-left scale-x-0 bg-gradient-to-r from-cyan via-cyan-bright to-magenta transition-transform duration-300 group-hover:scale-x-100" />
-
-                  {/* 1. Category, Telemetry Badges & Number */}
-                  <div className="flex items-start justify-between gap-4">
-                    <div className="flex flex-wrap items-center gap-2.5">
-                      <span className="font-mono text-xs font-bold text-steel bg-light px-2 py-0.5 rounded border border-line/60">
-                        0{i + 1}
-                      </span>
-                      <span className="rounded-full bg-cyan/10 px-2.5 py-0.5 text-[10px] font-mono font-semibold uppercase tracking-wider text-cyan-deep border border-cyan/20">
-                        {cat.sector}
-                      </span>
-                      <span className="hidden sm:inline-block font-mono text-[10px] text-steel/80 bg-white px-2 py-0.5 rounded border border-line/60">
-                        {telemetry.spec}
-                      </span>
-                    </div>
-                    <ArrowUpRight className="h-5 w-5 text-line transition-all duration-300 group-hover:text-cyan group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                {/* 1. Category & Number */}
+                <div className="flex items-start justify-between gap-4">
+                  <div className="flex items-center gap-3">
+                    <span className="font-mono text-xs text-steel">
+                      0{i + 1}
+                    </span>
+                    <span className="rounded-full bg-cyan/10 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-wide text-cyan-deep">
+                      {cat.sector}
+                    </span>
                   </div>
+                  <ArrowUpRight className="h-5 w-5 text-line transition-all duration-300 group-hover:text-cyan group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                </div>
 
-                  <div className="mt-5 flex-1 flex flex-col">
-                    {/* 2. Product Name */}
-                    <div className="flex items-baseline justify-between gap-2">
-                      <h3 className="text-h3 text-ink transition-colors duration-200 group-hover:text-cyan-deep">
-                        {cat.title}
-                      </h3>
+                <div className="mt-5 flex-1 flex flex-col">
+                  {/* 2. Product Name */}
+                  <h3 className="text-h3 text-ink transition-colors duration-200 group-hover:text-cyan-deep">
+                    {cat.title}
+                  </h3>
+
+                  {/* 3. Product Image */}
+                  {cat.image && (
+                    <div className="relative mt-4 aspect-[16/10] w-full max-h-64 sm:max-h-72 overflow-hidden rounded-xl border border-line/60 bg-white/70">
+                      <Image
+                        src={cat.image}
+                        alt={cat.imageAlt || `${cat.title} precision-machined components`}
+                        fill
+                        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 600px"
+                        className="object-contain p-3 transition-transform duration-500 ease-out group-hover:scale-105"
+                      />
                     </div>
+                  )}
 
-                    {/* Operational Telemetry Tagline */}
-                    <p className="font-mono text-[11px] text-cyan-deep/90 mt-1 font-medium flex items-center gap-1.5">
-                      <span className="w-1 h-1 rounded-full bg-cyan-deep" />
-                      {telemetry.tag}
-                    </p>
+                  {/* 4. Description */}
+                  <p className="mt-4 text-sm leading-relaxed text-ink-soft">
+                    {cat.blurb}
+                  </p>
 
-                    {/* 3. Product Image in Stitch Precision Optical Frame */}
-                    {cat.image && (
-                      <div className="relative mt-4 aspect-[16/10] w-full max-h-64 sm:max-h-72 overflow-hidden rounded-2xl border border-line/70 bg-gradient-to-b from-white to-light/60 p-2 shadow-inner">
-                        {/* Corner Reticle Marks */}
-                        <div className="pointer-events-none absolute top-2 left-2 w-3 h-3 border-t-2 border-l-2 border-cyan/40" />
-                        <div className="pointer-events-none absolute top-2 right-2 w-3 h-3 border-t-2 border-r-2 border-cyan/40" />
-                        <div className="pointer-events-none absolute bottom-2 left-2 w-3 h-3 border-b-2 border-l-2 border-cyan/40" />
-                        <div className="pointer-events-none absolute bottom-2 right-2 w-3 h-3 border-b-2 border-r-2 border-cyan/40" />
+                  {/* 5. OEM / Customer Association */}
+                  <p className="mt-3 text-xs font-semibold uppercase tracking-wider text-magenta">
+                    {cat.customer}
+                  </p>
+                </div>
 
-                        <Image
-                          src={cat.image}
-                          alt={cat.imageAlt || `${cat.title} precision-machined components`}
-                          fill
-                          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 600px"
-                          className="object-contain p-3 transition-transform duration-500 ease-out group-hover:scale-105"
-                        />
-                      </div>
-                    )}
-
-                    {/* 4. Description */}
-                    <p className="mt-4 text-sm leading-relaxed text-ink-soft">
-                      {cat.blurb}
-                    </p>
-
-                    {/* 5. OEM / Customer Association */}
-                    <div className="mt-3 flex items-center gap-2">
-                      <span className="font-mono text-[10px] uppercase tracking-wider text-steel">OEM PROGRAM:</span>
-                      <span className="font-mono text-xs font-semibold uppercase tracking-wider text-magenta bg-magenta/5 px-2 py-0.5 rounded border border-magenta/20">
-                        {cat.customer}
-                      </span>
-                    </div>
-                  </div>
-
-                  {/* 6. Technical Specifications List */}
-                  <ValveSpecList cat={cat} />
-                </Card>
-              );
-            })}
+                {/* 6. Technical Specifications List */}
+                <ValveSpecList cat={cat} />
+              </Card>
+            ))}
           </div>
         </div>
       </section>
 
       {/* ========================================================================= */}
-      {/* MATERIAL CAPABILITY SHOWCASE: METALLURGICAL REGISTRY                      */}
+      {/* MATERIAL CAPABILITY SHOWCASE: HIGH-NICKEL ALLOYS                          */}
       {/* ========================================================================= */}
       <Section tone="cloud" className="border-y border-line">
         <div className="grid gap-10 lg:grid-cols-12 items-center">
           <div className="lg:col-span-5">
             <Reveal>
-              <div className="inline-flex items-center gap-2 rounded-full border border-cyan/30 bg-cyan/10 px-3 py-1 text-[11px] font-mono font-semibold uppercase tracking-wider text-cyan-deep">
-                <Sparkles className="h-3.5 w-3.5 text-cyan-deep" />
-                Metallurgical Registry · Severe Environment
-              </div>
-              <h3 className="mt-3 text-h2 text-ink uppercase tracking-tight">
+              <span className="inline-flex items-center gap-2 text-eyebrow text-cyan-deep">
+                <Sparkles className="h-4 w-4" />
+                Metallurgical Capability
+              </span>
+              <h3 className="mt-3 text-h2 text-ink">
                 {materialCapabilities.headline}
               </h3>
               <p className="mt-4 text-lead text-ink-soft">
                 {materialCapabilities.lead}
               </p>
               <div className="mt-6 rounded-2xl border border-line bg-white p-5 shadow-sm">
-                <p className="text-xs font-mono font-semibold uppercase tracking-wider text-steel">
-                  Surface Enhancements &amp; Hardfacing
+                <p className="text-xs font-semibold uppercase tracking-wider text-steel">
+                  Surface Enhancements &amp; Coatings
                 </p>
                 <ul className="mt-3 space-y-2">
                   {materialCapabilities.surfaceTreatments.map((treatment) => (
@@ -253,20 +196,15 @@ export function Products() {
                 <Reveal
                   key={alloy.name}
                   delay={i * 0.08}
-                  className="rounded-2xl border border-line bg-white p-6 transition-all duration-300 hover:border-cyan hover:shadow-md group"
+                  className="rounded-2xl border border-line bg-white p-6 transition-all hover:border-cyan hover:shadow-md"
                 >
-                  <div className="flex items-center justify-between">
-                    <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-cyan-deep bg-cyan/10 px-2 py-0.5 rounded">
-                      ALLOY FAMILY 0{i + 1}
-                    </span>
-                    <span className="font-mono text-[10px] text-steel">
-                      NACE MR0175
-                    </span>
-                  </div>
-                  <h4 className="mt-3 font-display text-base font-bold text-ink group-hover:text-cyan-deep transition-colors">
+                  <span className="text-xs font-mono font-semibold uppercase tracking-wider text-cyan-deep">
+                    Grade Family 0{i + 1}
+                  </span>
+                  <h4 className="mt-2 font-display text-base font-bold text-ink">
                     {alloy.name}
                   </h4>
-                  <p className="mt-1 font-mono text-xs text-magenta font-semibold">
+                  <p className="mt-1 font-mono text-xs text-magenta font-medium">
                     {alloy.grades}
                   </p>
                   <p className="mt-3 text-xs leading-relaxed text-steel">
@@ -280,13 +218,17 @@ export function Products() {
       </Section>
 
       {/* ========================================================================= */}
-      {/* SECTION B: RENEWABLE ENERGY / WIND GENERATION (STITCH MAJOR VERTICAL)     */}
+      {/* SCROLL-EXPAND TRANSITION: OIL & GAS -> RENEWABLE ENERGY / WIND            */}
+      {/* ========================================================================= */}
+      <WindScrollExpand />
+
+      {/* ========================================================================= */}
+      {/* SECTION B: RENEWABLE ENERGY / WIND GENERATION                             */}
       {/* ========================================================================= */}
       <section className="relative overflow-hidden bg-navy text-white py-24 sm:py-28">
         {/* Subtle Aerodynamic Wind Streamlines Background */}
         <div className="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden="true">
-          <div className="absolute -left-20 top-1/4 h-80 w-80 rounded-full bg-lime/[0.05] blur-[120px]" />
-          <div className="absolute -right-20 bottom-1/4 h-80 w-80 rounded-full bg-cyan/[0.05] blur-[120px]" />
+          <div className="absolute -left-20 top-1/4 h-80 w-80 rounded-full bg-lime/[0.04] blur-[120px]" />
           <svg
             className="absolute inset-0 h-full w-full opacity-20"
             viewBox="0 0 1200 600"
@@ -313,24 +255,24 @@ export function Products() {
           <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-8 pb-12 border-b border-white/10">
             <div>
               <Reveal>
-                <div className="inline-flex items-center gap-2 rounded-full border border-lime/30 bg-lime/10 px-3.5 py-1 text-[11px] font-mono font-semibold uppercase tracking-wider text-lime">
+                <span className="inline-flex items-center gap-2 rounded-full border border-lime/30 bg-lime/10 px-3.5 py-1 text-eyebrow text-lime">
                   <Wind className="h-3.5 w-3.5 text-lime" />
-                  Sector 02 · Renewable Energy · SPEC-IEC 61400 / DNV-GL
-                </div>
+                  Vertical 02 · Renewable Energy
+                </span>
               </Reveal>
               <Reveal delay={0.08} className="mt-4">
-                <h2 className="text-display text-white tracking-tight uppercase">
-                  Wind Power Generation
+                <h2 className="text-display text-white">
+                  Wind Generation
                 </h2>
               </Reveal>
-              <Reveal delay={0.16} className="mt-3 max-w-2xl text-lead text-mist/80">
+              <Reveal delay={0.16} className="mt-3 max-w-2xl text-lead text-mist/75">
                 {windGenerationData.blurb}
               </Reveal>
             </div>
 
             {/* Wind Power Capacity Range Display: 0.5 MW -> 2 MW -> 3 MW */}
             <Reveal delay={0.2} className="shrink-0">
-              <div className="rounded-2xl border border-white/15 bg-navy-deep/80 p-6 backdrop-blur transition-all duration-300 hover:border-lime/40 shadow-xl">
+              <div className="rounded-2xl border border-white/15 bg-white/5 p-6 backdrop-blur transition-all duration-300 hover:border-lime/40">
                 <div className="flex items-center justify-between gap-6 text-xs text-mist/60 font-mono uppercase tracking-wider">
                   <span>{windGenerationData.applicationLabel}</span>
                   <span className="text-lime font-bold">{windGenerationData.capacityRange}</span>
@@ -338,7 +280,7 @@ export function Products() {
                 <div className="mt-3 flex items-center gap-3">
                   {windGenerationData.capacities.map((cap, idx) => (
                     <div key={cap} className="flex items-center gap-3">
-                      <span className="font-mono text-base sm:text-lg font-bold text-white px-3.5 py-1.5 rounded-xl bg-white/10 border border-white/15 transition-all duration-300 hover:border-lime/50 hover:bg-lime/10">
+                      <span className="font-display text-lg font-bold text-white px-3 py-1 rounded-xl bg-white/10 border border-white/10 transition-all duration-300 hover:border-lime/50 hover:bg-lime/10">
                         {cap}
                       </span>
                       {idx < windGenerationData.capacities.length - 1 && (
@@ -347,7 +289,7 @@ export function Products() {
                     </div>
                   ))}
                 </div>
-                <p className="mt-3 text-[11px] font-mono text-mist/60">
+                <p className="mt-3 text-[11px] text-mist/50">
                   Precision drivetrain components engineered for utility turbines
                 </p>
               </div>
@@ -356,43 +298,30 @@ export function Products() {
 
           {/* Wind Vertical Presentation: Large Left Visual + 3 Parts Categories */}
           <div className="mt-14 grid gap-10 lg:grid-cols-12 items-stretch">
-            {/* Left: Visible High-Resolution Wind Turbine & Drivetrain Visual with Stitch Telemetry HUD */}
+            {/* Left: Visible High-Resolution Wind Turbine & Drivetrain Visual with Parallax Depth */}
             <Reveal className="lg:col-span-5 flex flex-col">
               <Parallax distance={35} className="flex-1 flex flex-col">
-                <div className="group relative flex-1 min-h-[420px] overflow-hidden rounded-3xl border border-white/20 shadow-2xl bg-navy-deep">
+                <div className="group relative flex-1 min-h-[380px] overflow-hidden rounded-3xl border border-white/15 shadow-2xl">
                   <Image
                     src="/images/wind-energy.jpg"
                     alt="Wind turbine nacelle and mechanical drivetrain components"
                     fill
                     sizes="(max-width: 1024px) 100vw, 42vw"
-                    className="object-cover transition-transform duration-700 ease-out group-hover:scale-105 contrast-105 brightness-95"
+                    className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-navy via-navy/40 to-transparent" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-navy/95 via-navy/35 to-transparent" />
 
-                  {/* Top Status HUD Marker */}
-                  <div className="absolute top-4 inset-x-4 flex items-center justify-between text-[10px] font-mono">
-                    <span className="bg-navy-deep/90 backdrop-blur-md px-3 py-1 rounded-md text-lime border border-white/10 flex items-center gap-1.5 shadow">
-                      <Compass className="h-3 w-3" /> DRIVETRAIN PLATFORM
-                    </span>
-                    <span className="bg-navy-deep/90 backdrop-blur-md px-3 py-1 rounded-md text-white border border-white/10 shadow">
-                      IEC 61400 / DNV-GL
-                    </span>
-                  </div>
-
-                  {/* Bottom Telemetry Overlay */}
+                  {/* Overlay Badge */}
                   <div className="absolute bottom-6 left-6 right-6">
-                    <div className="rounded-2xl border border-white/15 bg-navy-deep/90 p-4 backdrop-blur-md shadow-lg">
-                      <div className="flex items-center justify-between text-[11px] font-mono mb-2">
-                        <span className="text-lime font-semibold">OEM: {windGenerationData.customer}</span>
-                        <span className="text-mist/70">Sub-zero: -46°C Charpy</span>
-                      </div>
-                      <h4 className="font-display text-lg sm:text-xl font-bold text-white uppercase tracking-tight">
-                        Wind Turbine Mechanical Drivetrains
-                      </h4>
-                      <p className="mt-1 text-xs text-mist/75">
-                        Critical concentric rings, bearing supports, and adapter interfaces for 0.5 MW to 3 MW platforms.
-                      </p>
-                    </div>
+                    <span className="rounded-full bg-lime/20 border border-lime/40 px-3 py-1 text-[11px] font-mono font-semibold uppercase tracking-wider text-lime">
+                      OEM Partner: {windGenerationData.customer}
+                    </span>
+                    <h4 className="mt-3 font-display text-xl font-bold text-white">
+                      Wind Turbine Mechanical Drivetrains
+                    </h4>
+                    <p className="mt-1 text-xs text-mist/75">
+                      Critical concentric rings, bearing supports, and adapter interfaces for 0.5 MW to 3 MW platforms.
+                    </p>
                   </div>
                 </div>
               </Parallax>
@@ -404,23 +333,23 @@ export function Products() {
                 <Reveal
                   key={subcat.id}
                   delay={idx * 0.08}
-                  className="rounded-2xl border border-white/10 bg-navy-deep/70 p-6 backdrop-blur transition-all duration-300 hover:border-lime/40 hover:bg-navy-deep/90 shadow-lg"
+                  className="rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur transition-all duration-300 hover:border-lime/40 hover:bg-white/[0.08]"
                 >
                   <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 border-b border-white/10 pb-4">
                     <div className="flex items-center gap-3">
-                      <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-lime/15 text-lime font-mono text-sm font-bold border border-lime/30">
+                      <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-lime/15 text-lime font-mono text-sm font-bold">
                         0{idx + 1}
                       </span>
                       <div>
-                        <h4 className="font-display text-xl font-bold text-white tracking-tight uppercase">
+                        <h4 className="font-display text-xl font-bold text-white tracking-tight">
                           {subcat.title}
                         </h4>
-                        <p className="text-xs text-mist/65 mt-0.5">
+                        <p className="text-xs text-mist/60 mt-0.5">
                           {subcat.description}
                         </p>
                       </div>
                     </div>
-                    <span className="self-start sm:self-auto rounded-full bg-white/10 px-3 py-1 font-mono text-[11px] text-lime border border-white/10">
+                    <span className="self-start sm:self-auto rounded-full bg-white/10 px-3 py-0.5 font-mono text-[11px] text-lime">
                       {subcat.components.length} Components
                     </span>
                   </div>
@@ -429,11 +358,11 @@ export function Products() {
                     {subcat.components.map((c) => (
                       <div
                         key={c.name}
-                        className="rounded-xl border border-white/10 bg-white/[0.03] px-4 py-3 text-xs transition-colors hover:border-lime/30 hover:bg-white/[0.06]"
+                        className="rounded-xl border border-white/5 bg-white/[0.04] px-4 py-3 text-xs"
                       >
                         <p className="font-medium text-white">{c.name}</p>
                         <p className="mt-1 font-mono text-[11px] text-mist/60">
-                          {c.size} · <span className="text-lime font-medium">{c.material}</span>
+                          {c.size} · <span className="text-lime">{c.material}</span>
                         </p>
                       </div>
                     ))}
@@ -447,4 +376,3 @@ export function Products() {
     </div>
   );
 }
-
