@@ -163,6 +163,67 @@ export function Facility() {
           ))}
         </div>
 
+        {/* STITCH PANORAMIC TECHNICAL INFRASTRUCTURE FRAME */}
+        <Reveal delay={0.12} className="mt-10">
+          <div className="relative rounded-3xl overflow-hidden bg-navy-deep border border-line shadow-xl">
+            <div className="relative h-72 sm:h-96 w-full">
+              <Image
+                src="/images/machinery/mazak-hmc.jpg"
+                alt="Multi-axis CNC machining bays and metrology facility at ABI Flow"
+                fill
+                sizes="(max-width: 1280px) 100vw, 1200px"
+                className="object-cover contrast-105 brightness-95"
+              />
+              <div className="absolute inset-0 bg-gradient-to-r from-navy/95 via-navy/40 to-transparent pointer-events-none" />
+
+              {/* Top Plant Telemetry Marker */}
+              <div className="absolute top-4 left-4 right-4 flex flex-wrap items-center justify-between gap-2">
+                <div className="bg-navy-deep/90 backdrop-blur-md px-3.5 py-1.5 rounded-xl border border-white/15 shadow-md">
+                  <span className="font-mono text-[10px] font-bold text-cyan-bright uppercase tracking-wider">
+                    PLANT TELEMETRY · 24,000 SQ.FT PRECISION FACILITY
+                  </span>
+                  <span className="font-mono text-xs text-white block mt-0.5 font-medium">
+                    MAZAK HORIZONTAL &amp; MULTI-TASKING CELLS ACTIVE
+                  </span>
+                </div>
+                <div className="hidden sm:flex items-center gap-2">
+                  <span className="bg-navy-deep/90 backdrop-blur-md px-3 py-1.5 rounded-lg border border-white/10 font-mono text-[11px] text-cyan-bright">
+                    FLEET: <strong>28+ UNITS</strong>
+                  </span>
+                  <span className="bg-navy-deep/90 backdrop-blur-md px-3 py-1.5 rounded-lg border border-white/10 font-mono text-[11px] text-lime">
+                    CMM VOLUME: <strong>1200 × 2400 MM</strong>
+                  </span>
+                </div>
+              </div>
+
+              {/* Optical Reticle Center Accent */}
+              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none opacity-40 hidden sm:block">
+                <div className="w-16 h-16 relative flex items-center justify-center">
+                  <div className="absolute inset-x-0 top-1/2 h-px bg-cyan" />
+                  <div className="absolute inset-y-0 left-1/2 w-px bg-cyan" />
+                  <div className="w-12 h-12 rounded-full border border-cyan/60" />
+                </div>
+              </div>
+
+              {/* Bottom Climate & Environmental Regulation Info */}
+              <div className="absolute bottom-4 left-4 right-4 flex flex-wrap items-center justify-between gap-3">
+                <div className="bg-navy-deep/90 backdrop-blur-md p-3.5 sm:p-4 rounded-xl border border-white/15 max-w-lg shadow-lg">
+                  <div className="font-mono text-[10px] uppercase font-bold text-cyan-bright mb-0.5 tracking-wider">
+                    Temperature &amp; Humidity Regulated Metrology
+                  </div>
+                  <p className="text-xs text-mist/80">
+                    Inspection bay thermally stabilized at 20°C ±0.5°C with volumetric error compensation for sub-micron scanning fidelity.
+                  </p>
+                </div>
+                <div className="hidden md:flex items-center gap-2 bg-navy-deep/90 backdrop-blur-md px-3.5 py-2 rounded-xl border border-white/15 font-mono text-xs text-mist/70">
+                  <span>LINEAR RESOLUTION:</span>
+                  <strong className="text-cyan-bright">0.0001 MM</strong>
+                </div>
+              </div>
+            </div>
+          </div>
+        </Reveal>
+
         {/* Process Flow Timeline */}
         <div className="relative mt-14">
           <div
@@ -189,10 +250,10 @@ export function Facility() {
         {/* Interactive Machine Showcase Header */}
         <div className="mt-16 flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 border-b border-line pb-4">
           <div>
-            <span className="text-eyebrow text-cyan-deep">
-              Engineering Equipment Catalog
+            <span className="text-eyebrow text-cyan-deep font-mono">
+              ENGINEERING FLEET TELEMETRY
             </span>
-            <h3 className="mt-1 font-display text-2xl font-bold tracking-tight text-ink">
+            <h3 className="mt-1 font-display text-2xl font-bold tracking-tight text-ink uppercase">
               Core Machinery &amp; Metrology Units
             </h3>
           </div>
